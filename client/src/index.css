@@ -1,0 +1,76 @@
+
+/* --- Import Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
+/* --- Tailwind CSS Directives --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base Layer & Theming with CSS Variables --- */
+@layer base {
+  /* Default theme is light mode */
+  :root, [data-theme='light'] {
+    --background: 248 250 252;   /* slate-50 */
+    --foreground: 30 41 59;     /* slate-800 */
+    --card: 255 255 255;         /* white */
+    --card-foreground: 15 23 42; /* slate-900 */
+    --primary: 236 72 153;       /* brand-pink */
+    --primary-foreground: 255 255 255;
+    --secondary: 249 115 22;     /* brand-orange */
+    --secondary-foreground: 255 255 255;
+    --muted: 226 232 240;        /* slate-200 */
+    --muted-foreground: 100 116 139; /* slate-500 */
+    --border: 226 232 240;        /* slate-200 */
+    --input: 241 245 249;        /* slate-100 */
+    --ring: 236 72 153;          /* brand-pink */
+  }
+
+  /* Dark mode theme variables */
+  [data-theme='dark'] {
+    --background: 9 9 11;       /* zinc-950 */
+    --foreground: 212 212 216;   /* zinc-300 */
+    --card: 24 24 27;           /* zinc-900 */
+    --card-foreground: 244 244 245; /* zinc-100 */
+    --primary: 236 72 153;
+    --primary-foreground: 255 255 255;
+    --secondary: 249 115 22;
+    --secondary-foreground: 255 255 255;
+    --muted: 39 39 42;          /* zinc-800 */
+    --muted-foreground: 161 161 170; /* zinc-400 */
+    --border: 39 39 42;          /* zinc-800 */
+    --input: 63 63 70;           /* zinc-700 */
+    --ring: 236 72 153;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    /* Use our themeable utility classes */
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+/* --- Custom Utility & Scrollbar Styles --- */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.muted.DEFAULT') theme('colors.input');
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-input;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted/80;
+  }
+}
