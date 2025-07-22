@@ -1,7 +1,7 @@
 # Maitri - A Modern Real-Time Chat Application
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/user-attachments/assets/dd698f1f-d510-449e-87d5-d7211ec189c4" alt="Maitri Logo" width="150">
+  <img src="file:///C:/Users/LENOVO/Desktop/Client%20Projects/Maitri/client/public/file.svg" alt="Maitri Logo" width="150">
 </p>
 
 <h3 align="center">
