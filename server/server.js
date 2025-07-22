@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import express from "express";
 
 // Import our custom-configured server, app, and io instances
 import { app, httpServer, io } from "./socket/socket.js";
@@ -26,7 +25,8 @@ initializeSocket(io);
 
 // Middleware setup
 const corsOptions = {
-  origin: "http://localhost:5173",
+  // Use the live client URL from environment variables in production, fallback for development
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
   credentials: true,
 };
 app.use(cors(corsOptions));
