@@ -11,7 +11,7 @@
 <p align="center">
   <strong>Live Demo (Frontend on Vercel):</strong> <a href="#">[Your Vercel Link Here]</a>  
   <br />
-  <strong>Backend API (on Render):</strong> <a href="#">[Your Render Link Here]</a>
+  <strong>Backend API (on Render):</strong> <a href="#">https://maitri-api.onrender.com</a>
 </p>
 
 ---

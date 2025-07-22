@@ -32,6 +32,9 @@ dist-ssr
 # Environment variables
 # Ignore all .env files (e.g., .env, .env.local)
 .env*
+.env.production*
+.env.development*
+.env.test*
 
 # Logs
 npm-debug.log*
