@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import express from "express";
 
 // Import our custom-configured server, app, and io instances
 import { app, httpServer, io } from "./socket/socket.js";
