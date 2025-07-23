@@ -20,32 +20,43 @@ dotenv.config();
 // Connect to the database
 connectDB();
 
-// Middleware setup
-const corsOptions = {
-  // Use the live client URL from environment variables in production, fallback for development
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
-  credentials: true,
-};
-app.use(cors(corsOptions));
-app.use(express.json()); // To parse JSON request bodies
-app.use(cookieParser()); // To parse cookies
+// ✅ Fix CORS setup
+const allowedOrigins = [
+  "https://maitri-blond.vercel.app",
+  "http://localhost:5173", // for dev
+];
 
-// API Routes
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // ✅ required to allow cookies
+  })
+);
+
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
+
+// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/groups", groupRoutes);
 app.use("/api/conversations", conversationRoutes);
 app.use("/api/stories", storyRoutes);
 
-// Test Route for Health Check
+// Health check
 app.get("/", (req, res) => {
   res.send("Maitri API is running successfully!");
 });
 
-// Server port configuration
+// Start server
 const PORT = process.env.PORT || 5000;
-
-// Start the server
 httpServer.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
