@@ -24,7 +24,14 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (userInfo) {
-      const newSocket = io("http://localhost:5000", {
+      // --- THIS IS THE FIX ---
+      // Use the production URL from environment variables, otherwise fallback to localhost.
+      // We remove the '/api' from the end for the socket connection.
+      const SOCKET_URL = import.meta.env.VITE_API_URL
+        ? import.meta.env.VITE_API_URL.replace("/api", "")
+        : "http://localhost:5000";
+
+      const newSocket = io(SOCKET_URL, {
         withCredentials: true,
         query: { userId: userInfo._id },
       });
