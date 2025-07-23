@@ -1,11 +1,4 @@
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  withCredentials: true,
-});
+import axiosInstance from "./index.js";
 
 export const getUserProfileApi = async () => {
   const { data } = await axiosInstance.get("/users/profile");
@@ -18,6 +11,7 @@ export const updateUserProfileApi = async (formData) => {
   });
   return data;
 };
+
 export const searchUsersApi = async (searchTerm) => {
   const { data } = await axiosInstance.get(`/users?search=${searchTerm}`);
   return data;

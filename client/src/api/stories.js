@@ -1,11 +1,4 @@
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  withCredentials: true,
-});
+import axiosInstance from "./index.js";
 
 export const getStoriesApi = async () => {
   const { data } = await axiosInstance.get("/stories");
@@ -14,9 +7,7 @@ export const getStoriesApi = async () => {
 
 export const createStoryApi = async (formData) => {
   const { data } = await axiosInstance.post("/stories", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
