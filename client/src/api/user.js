@@ -18,3 +18,8 @@ export const updateUserProfileApi = async (formData) => {
   });
   return data;
 };
+export const searchUsersApi = async (searchTerm) => {
+  const { data } = await axiosInstance.get(`/users?search=${searchTerm}`);
+  return data;
+};
+  

@@ -68,15 +68,24 @@ export const logoutUser = (req, res) => {
 };
 
 /**
- * @desc    Get all users (for sidebar)
- * @route   GET /api/users
+ * @desc    Get all users OR search for users by username
+ * @route   GET /api/users?search=...
  * @access  Private
  */
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({ _id: { $ne: req.user._id } }).select(
-      "-password"
-    );
+    const keyword = req.query.search
+      ? {
+          username: {
+            $regex: req.query.search,
+            $options: "i", // 'i' for case-insensitive
+          },
+        }
+      : {};
+
+    const users = await User.find(keyword)
+      .find({ _id: { $ne: req.user._id } })
+      .select("-password");
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
@@ -84,7 +93,7 @@ export const getUsers = async (req, res) => {
 };
 
 /**
- * @desc    Get user profile
+ * @desc    Get current user profile
  * @route   GET /api/users/profile
  * @access  Private
  */
