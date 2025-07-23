@@ -14,10 +14,13 @@ const io = new Server(httpServer, {
   },
 });
 
+// Initialize all socket event listeners by passing the 'io' instance
 initializeSocket(io);
 
+// This map will store online users { userId: socketId }
 export const userSocketMap = new Map();
 
+// Helper function to get a user's socket ID
 export const getReceiverSocketId = (receiverId) => {
   return userSocketMap.get(receiverId);
 };
